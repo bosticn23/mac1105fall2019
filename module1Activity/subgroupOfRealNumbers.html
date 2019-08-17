@@ -1,0 +1,266 @@
+<!DOCTYPE html><html lang="en"><head> <title>Subgroups of Real Numbers</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"/> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"/> 
+<!-- charset=utf-8,-css,html,htex4ht,xhtml --> 
+<meta name="src" content="subgroupOfRealNumbers.tex"/> 
+<meta name="author" content="Darryl Chamberlain
+Jr."/> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"/> 
+<meta name="ximera" content="version 0.0.1"/> 
+<link href="https://ximera.osu.edu/public/stylesheets/standalone.css" rel="stylesheet" media="screen"/> 
+<script type="text/javascript" async="" src="https://ximera.osu.edu/public/javascripts/standalone.min.js"></script> 
+<meta name="learning-outcome" content="Understand the different sets of numbers along with the properties of these sets."/> 
+<meta name="dependency" content="30833bed8deed729ed5cc19dd50d21893a177681 module1Activity/subgroupOfRealNumbers.tex"/></head><body> 
+<div class="preamble"><script type="math/tex">\newenvironment {prompt}{}{}
+\newcommand {\ungraded }[0]{}
+\newcommand {\HyperFirstAtBeginDocument }[0]{\AtBeginDocument }</script><script type="text/javascript"> 
+</script> 
+</div>
+<div class="abstract">
+<!--l. 18--><p class="noindent">Identify the subgroup of Real numbers a number belongs to.
+</p></div>   <div class="maketitle"></div>
+<a href="https://cnx.org/contents/mwjClAV_@8.1:0KhpF2RH@23/Real-Numbers-Algebra-Essentials">Link to section in online textbook</a>
+<!--l. 27--><p class="noindent">First, watch <a href="https://mediasite.video.ufl.edu/Mediasite/Play/67aa041fe31847d7be8047e131f256b71d">this video</a> to review the different sets of Real numbers.
+</p><!--l. 29--><p class="noindent">After watching the video, write down definitions for the following subgroups of the
+Real numbers. You should include examples for each (you may even want
+to take a sneak peak at the problems and use some of these as examples!)
+and descriptions of how to tell what the smallest set the number belongs
+to.
+</p>
+     <ul class="itemize1">
+     <li class="itemize">Natural:
+     </li>
+     <li class="itemize">Whole:
+     </li>
+     <li class="itemize">Integers:
+     </li>
+     <li class="itemize">Rational:
+     </li>
+     <li class="itemize">Irrational:</li></ul>
+<div role="article" class="problem-environment question" id="problem1"><a id="x1-5r1"></a>
+<!--l. 41--><p class="noindent">It also helps to visualize the groups in a chart. An empty chart is provided below. Fill
+in the subgroups and try to classify the following numbers:
+</p><!--l. 43--><p class="noindent">
+                                                                  
+
+                                                                  
+                                 <script type="math/tex; mode=display"> -\frac {21}{7}, -\frac {7}{21}, \frac {21}{7}, \frac {\pi }{4}, \frac {4}{\pi }, \frac {0}{\pi }, \frac {\pi }{0}, \sqrt {4}, \sqrt {-4}, \sqrt {21}, \sqrt {-21} </script>
+</p><!--l. 45--><p class="noindent"><img src="realNumbersChart.png" alt="PIC"/>
+</p><!--l. 47--><p class="noindent"><strong><em>Smallest subgroup the number belongs to:</em></strong>
+</p><!--l. 49--><p class="noindent">Natural: <script type="math/tex">\answer {\frac {21}{7}}</script>, <script type="math/tex">\answer {\sqrt {4}}</script>
+</p><!--l. 51--><p class="noindent">Whole: <script type="math/tex">\answer {\frac {0}{\pi }}</script>
+</p><!--l. 53--><p class="noindent">Integer: <script type="math/tex">\answer {-\frac {21}{7}}</script>
+</p><!--l. 55--><p class="noindent">Rational: <script type="math/tex">\answer {-\frac {7}{21}}</script>
+</p><!--l. 57--><p class="noindent">Irrational: <script type="math/tex">\answer {\frac {\pi }{4}}</script>, <script type="math/tex">\answer {\frac {4}{\pi }}</script>, <script type="math/tex">\answer {\sqrt {21}}</script>
+</p><!--l. 59--><p class="noindent">Not a Real Number: <script type="math/tex">\answer {\frac {\pi }{0}}</script>, <script type="math/tex">\answer {\sqrt {-4}}</script>, <script type="math/tex">\answer {\sqrt {-21}}</script>
+</p>
+</div>
+<!--l. 63--><p class="noindent"><strong>Remember to reduce first, then decide the smallest subgroup the number
+belongs to!</strong>
+</p>
+<script type="text/sagemath"># THIS code generates a random Real Number. Options:
+# Natural
+# Whole
+# Integer
+# Rational
+# Irrational
+# Not a Real number
+# Complex
+# Dividing by zero
+
+def generateNatural():
+    denominator = ZZ.random_element(15)+1
+    numerator = denominator*(ZZ.random_element(15)+1)
+    negOrNo = ""
+    displayProblem = [numerator**2, denominator**2, negOrNo]
+    return displayProblem
+
+                                                                  
+
+                                                                  
+def generateWhole():
+    denomBefore = ZZ.random_element(15)+1
+    numerator = 0
+    negOrNo = ""
+    maybeComplexDisplayed = sample(["Complex", "Nah"], 1)
+    if maybeComplexDisplayed == "Complex":
+        denominator = latex(denomBefore*pi)
+    else:
+        denominator = denomBefore
+    displayProblem = [numerator**2, denominator**2, negOrNo]
+    return displayProblem
+
+def generateInteger():
+    denominator = ZZ.random_element(15)+1
+    numerator = denominator*(ZZ.random_element(15)+1)
+    negOrNo = "-"
+    displayProblem = [numerator**2, denominator**2, negOrNo]
+    return displayProblem
+
+def generateRational():
+    numeratorBefore = ZZ.random_element(15)+7
+    denominatorBefore = ZZ.random_element(15)+7
+    negative = ZZ.random_element(2)
+    if negative == 0:
+        negOrNo = ""
+    else:
+        negOrNo = "-"
+    counter = 0
+    while gcd(numeratorBefore, denominatorBefore) >= min(numeratorBefore, denominatorBefore):
+        numerator = ZZ.random_element(15)+7
+        denominator = ZZ.random_element(15)+7
+        counter = counter + 1
+                                                                  
+
+                                                                  
+        print "Numerator: %d, \n Denominator: %d, \n Counter: %d" %(numerator, denominator, counter)
+    numerator = numeratorBefore**2
+    denominator = denominatorBefore**2
+    displayProblem = [numerator, denominator, negOrNo]
+    return displayProblem
+
+def generateIrrational():
+    numeratorBefore = ZZ.random_element(15)+1
+    denominatorBefore = ZZ.random_element(15)+1
+    negative = ZZ.random_element(2)
+    if negative == 0:
+        negOrNo = ""
+    else:
+        negOrNo = "-"
+    integerType = type(sqrt(4))
+    while type(sqrt(numeratorBefore/denominatorBefore)) == integerType:
+        numeratorBefore = ZZ.random_element(15)+1
+        denominatorBefore = ZZ.random_element(15)+1
+    numerator = numeratorBefore
+    denominator = denominatorBefore
+    displayProblem = [numerator, denominator, negOrNo]
+    return displayProblem
+
+def generateNotReal():
+    numeratorBefore = ZZ.random_element(15)+1
+    denominatorBefore = ZZ.random_element(15)+1
+    negative = ZZ.random_element(2)
+    if negative == 0:
+        negOrNo = ""
+    else:
+        negOrNo = "-"
+    complexOrNotNumber = sample(["ComplexTop", "ComplexBottom", "NotNumber"], 1)[0]
+                                                                  
+
+                                                                  
+    if complexOrNotNumber=="ComplexTop":
+        numerator = -numeratorBefore*pi
+        denominator = denominatorBefore
+    elif complexOrNotNumber=="ComplexBottom":
+        numerator = -numeratorBefore
+        denominator = denominatorBefore*pi
+    elif complexOrNotNumber=="NotNumber":
+        topOrBottom = ZZ.random_element(2)
+        if topOrBottom==0:
+            numerator = -numeratorBefore
+            denominator = 0
+        else:
+            numerator = -numeratorBefore * pi
+            denominator = 0
+    else:
+        displayProblem = "Something went wrong generating a non-Real number."
+        print displayProblem
+    displayProblem = [numerator, denominator, negOrNo]
+    return displayProblem
+
+def generateDisplay(answer):
+    if answer == "Natural":
+        numerator, denominator, negOrNo = generateNatural()
+    elif answer == "Whole":
+        numerator, denominator, negOrNo = generateWhole()
+    elif answer == "Integer":
+        numerator, denominator, negOrNo = generateInteger()
+    elif answer == "Rational":
+        numerator, denominator, negOrNo = generateRational()
+    elif answer == "Irrational":
+        numerator, denominator, negOrNo = generateIrrational()
+    elif answer == "NotRealNumber":
+                                                                  
+
+                                                                  
+        numerator, denominator, negOrNo = generateNotReal()
+    else:
+        numerator, denominator, negOrNo = [0, 0, 0]
+        print "\n\n\n Something went wrong choosing how to display the problem. \n\n\n\n"
+    return [numerator, denominator, negOrNo]
+
+def assignSetValue(set):
+    if set == "Natural":
+        value = 0
+    elif set == "Whole":
+        value = 1
+    elif set == "Integer":
+        value = 2
+    elif set == "Rational":
+        value = 3
+    elif set == "Irrational":
+        value = 4
+    elif set == "NotRealNumber":
+        value = 5
+    else:
+        value = 6
+        print "Something went wrong when assigning the set a value. Please look into this."
+    return value
+
+############ END OF DEFINITIONS ###############
+
+listOptions=["Natural", "Whole", "Integer", "Rational", "Irrational", "NotRealNumber"]
+
+###### QUESTION 1 #########
+set1 = sample(listOptions, 1)[0]
+print set1
+answer1 = assignSetValue(set1)
+                                                                  
+
+                                                                  
+numerator1, denominator1, negOrNo1 = generateDisplay(set1)
+
+###### QUESTION 2 #########
+set2 = sample(listOptions, 1)[0]
+answer2 = assignSetValue(set2)
+numerator2, denominator2, negOrNo2 = generateDisplay(set2)
+
+###### QUESTION 3 #########
+set3 = sample(listOptions, 1)[0]
+answer3 = assignSetValue(set3)
+numerator3, denominator3, negOrNo3 = generateDisplay(set3)
+
+</script>
+<!--l. 225--><p class="noindent"><strong>Note: This part of the homework will change each time you click
+“Another”. You can keep clicking “Another” to practice seeing these more
+difficult numbers to classify.</strong>
+</p>
+<div role="article" class="problem-environment question" id="problem2"><a id="x1-6r2"></a> Which of the following is the <strong>smallest</strong> set of Real numbers that <script type="math/tex">\sage {negOrNo1} \sqrt { \frac {\sage {numerator1}}{\sage {denominator1}}} </script> belongs
+to?
+<!--l. 237--><p class="noindent"><em>To work around current Xronos issues, input the corresponding number for the correct
+set. <br class="newline"/>Natural - 0 <br class="newline"/>Whole - 1 <br class="newline"/>Integer - 2 <br class="newline"/>Rational - 3 <br class="newline"/>Irrational - 4 <br class="newline"/>Not a Real Number - 5 </em>
+</p><!--l. 239--><p class="noindent"><script type="math/tex">\answer {\sage {answer1}}</script>
+</p></div>
+<div role="article" class="problem-environment question" id="problem3"><a id="x1-7r3"></a> Which of the following is the <strong>smallest</strong> set of Real numbers that <script type="math/tex">\sage {negOrNo2} \sqrt {\frac {\sage {numerator2}}{\sage {denominator2}}} </script> belongs
+to?
+<!--l. 252--><p class="noindent"><em>To work around current Xronos issues, input the corresponding number for the correct
+set. <br class="newline"/>Natural - 0 <br class="newline"/>Whole - 1 <br class="newline"/>Integer - 2 <br class="newline"/>Rational - 3 <br class="newline"/>Irrational - 4 <br class="newline"/>Not a Real Number - 5 </em>
+</p><!--l. 254--><p class="noindent"><script type="math/tex">\answer {\sage {answer2}}</script>
+</p></div>
+<div role="article" class="problem-environment question" id="problem4"><a id="x1-8r4"></a> Which of the following is the <strong>smallest</strong> set of Real numbers that <script type="math/tex">\sage {negOrNo3} \sqrt {\frac {\sage {numerator3}}{\sage {denominator3}}} </script> belongs
+to?
+<!--l. 267--><p class="noindent"><em>To work around current Xronos issues, input the corresponding number for the correct
+set. <br class="newline"/>Natural - 0 <br class="newline"/>Whole - 1 <br class="newline"/>Integer - 2 <br class="newline"/>Rational - 3 <br class="newline"/>Irrational - 4 <br class="newline"/>Not a Real Number - 5 </em>
+</p><!--l. 269--><p class="noindent"><script type="math/tex">\answer {\sage {answer3}}</script>
+</p></div>
+ 
+ 
+
+                                                                  
+
+                                                                  
+                                                                  
+
+
+</body></html>

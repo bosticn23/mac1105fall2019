@@ -1,0 +1,209 @@
+<!DOCTYPE html><html lang="en"><head> <title>Subgroups of Complex Numbers</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"/> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"/> 
+<!-- charset=utf-8,-css,html,htex4ht,xhtml --> 
+<meta name="src" content="subgroupOfComplexNumbers.tex"/> 
+<meta name="author" content="Darryl Chamberlain
+Jr."/> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"/> 
+<meta name="ximera" content="version 0.0.1"/> 
+<link href="https://ximera.osu.edu/public/stylesheets/standalone.css" rel="stylesheet" media="screen"/> 
+<script type="text/javascript" async="" src="https://ximera.osu.edu/public/javascripts/standalone.min.js"></script> 
+<meta name="learning-outcome" content="Understand the different sets of numbers along with the properties of these sets."/> 
+<meta name="dependency" content="74bb5dbc383cf646d450bbf8291c87f6a049222a mac1105summer2019/module1Activity/subgroupOfComplexNumbers.tex"/></head><body> 
+<div class="preamble"><script type="math/tex">\newenvironment {prompt}{}{}
+\newcommand {\ungraded }[0]{}
+\newcommand {\HyperFirstAtBeginDocument }[0]{\AtBeginDocument }</script><script type="text/javascript"> 
+</script> 
+</div>
+<div class="abstract">
+<!--l. 18--><p class="noindent">Identify the subgroup of Complex numbers a number belongs to.
+</p></div>   <div class="maketitle"></div>
+<a href="https://cnx.org/contents/mwjClAV_@8.1:Sqk1HAGf@9/Complex-Numbers">Link to section in textbook</a>
+<!--l. 28--><p class="noindent">Now, watch <a href="https://mediasite.video.ufl.edu/Mediasite/Play/8fae3825474042a297038c5d2385c4f51d">this video</a> to review the different sets of Complex numbers. First, try
+to define the following subgroups of the Complex Numbers. You should
+include examples for each (you may even want to take a sneak peak at the
+problems at the bottom of the page and use some of these as examples!)
+and descriptions of how to tell what the smallest set the number belongs
+to.
+</p>
+     <ul class="itemize1">
+     <li class="itemize">Nonreal Complex:
+     </li>
+     <li class="itemize">Pure Imaginary:
+     </li>
+     <li class="itemize">Not a Complex Number:</li></ul>
+<!--l. 36--><p class="noindent">The Real Numbers are just a part of the Complex Numbers, so we still have the
+subgroups from Objective 1. Now we will look at how all of these subgroups are
+related.
+</p>
+<div role="article" class="problem-environment question" id="problem1"><a id="x1-5r1"></a> Like before, we will visualize the groups in a chart. An empty chart is provided
+below. Fill in the subgroups and try to classify the following numbers:
+<!--l. 41--><p class="noindent">
+                                 <script type="math/tex; mode=display"> -\frac {21}{7}+i, -\frac {7}{21}, \frac {21}{7}, \frac {\pi }{4}, \frac {4}{\pi }i, \frac {0}{\pi }, \frac {\pi }{0}i, -\sqrt {4}, \sqrt {-4}, \sqrt {21}, \sqrt {-21} </script>
+                                                                  
+
+                                                                  
+</p><!--l. 43--><p class="noindent"><img src="complexNumbersChart.png" alt="PIC"/>
+</p><!--l. 45--><p class="noindent"><strong>Smallest subgroup the number belongs to:</strong>
+</p><!--l. 47--><p class="noindent">Natural: <script type="math/tex">\answer {\frac {21}{7}}</script>
+</p><!--l. 49--><p class="noindent">Whole: <script type="math/tex">\answer {\frac {0}{\pi }}</script>
+</p><!--l. 51--><p class="noindent">Integer: <script type="math/tex">\answer {-\sqrt {4}}</script>
+</p><!--l. 53--><p class="noindent">Rational: <script type="math/tex">\answer {-\frac {7}{21}}</script>
+</p><!--l. 55--><p class="noindent">Irrational: <script type="math/tex">\answer {\frac {\pi }{4}}</script>, <script type="math/tex">\answer {\sqrt {21}}</script>
+</p><!--l. 57--><p class="noindent">Pure Imaginary: <script type="math/tex">\answer {\frac {4}{\pi }i}</script>, <script type="math/tex">\answer {\sqrt {-4}}</script>, <script type="math/tex">\answer {\sqrt {-21}}</script>
+</p><!--l. 59--><p class="noindent">Nonreal Complex: <script type="math/tex">\answer {-\frac {21}{7} + i}</script>
+</p><!--l. 61--><p class="noindent">Not a Complex Number: <script type="math/tex">\answer {\frac {\pi }{0}i}</script>
+</p>
+</div>
+<!--l. 65--><p class="noindent"><strong>Like Objective 1, remember to reduce first, then decide the smallest
+subgroup the number belongs to!</strong>
+</p><!--l. 67--><p class="noindent"><strong>Note: This part of the homework will change each time you clikc
+“Another”. You can keep clicking “Another” to practice seeing these more
+difficult numbers to classify.</strong>
+</p>
+<script type="text/sagemath"># THIS code generates random Complex number. Options:
+    # Rational
+    # Irrational
+    # Nonreal Complex
+    # Pure Imaginary
+    # Not a Complex number
+
+# Structure of question:
+    #  \frac{\sage{numerator}}{\sage{denominator}} + \sage{complexPart}
+
+def generateRational():
+    numerator = (ZZ.random_element(15)+2)*(-1)**(ZZ.random_element(2))
+    denominator = ZZ.random_element(15)+2
+    i = var('i')
+    complexPart = (ZZ.random_element(15)+2)*i**2
+    displayProblem = [numerator, denominator, complexPart]
+                                                                  
+
+                                                                  
+    return displayProblem
+
+def generateIrrational():
+    numerator = (ZZ.random_element(2, 15))*(-1)**(ZZ.random_element(2))
+    denominator = (ZZ.random_element(15)+2)*pi
+    i = var('i')
+    complexPart = (ZZ.random_element(15)+2)*i**2
+    displayProblem = [numerator, denominator, complexPart]
+    return displayProblem
+
+def generateNonRealComplex():
+    numerator = (ZZ.random_element(15)+2)*(-1)**(ZZ.random_element(2))
+    denominator = (ZZ.random_element(15)+2)*pi
+    i = var('i')
+    complexPart = (ZZ.random_element(15)+2)*i
+    displayProblem = [numerator, denominator, complexPart]
+    return displayProblem
+
+def generatePureImaginary():
+    numerator = 0
+    denominator = (ZZ.random_element(15)+2)*pi
+    i = var('i')
+    complexPart = (ZZ.random_element(15)+2)*i
+    displayProblem = [numerator, denominator, complexPart]
+    return displayProblem
+
+def generateNotComplex():
+    numerator = pi*(ZZ.random_element(15)+2)*(-1)**(ZZ.random_element(2))
+    denominator = 0
+    i = var('i')
+    complexPart = (ZZ.random_element(15)+2)*i
+    displayProblem = [numerator, denominator, complexPart]
+                                                                  
+
+                                                                  
+    return displayProblem
+
+def generateDisplay(answer):
+    if answer == "Rational":
+        numerator, denominator, complexPart = generateRational()
+    elif answer == "Irrational":
+        numerator, denominator, complexPart = generateIrrational()
+    elif answer == "NonrealComplex":
+        numerator, denominator, complexPart = generateNonRealComplex()
+    elif answer == "PureImaginary":
+        numerator, denominator, complexPart = generatePureImaginary()
+    elif answer == "NotComplexNumber":
+        numerator, denominator, complexPart = generateNotComplex()
+    else:
+        numerator, denominator, complexPart = [0, 0, 0]
+        print "\n\n\n Something went wrong choosing how to display the problem. \n\n\n\n"
+    return [numerator, denominator, complexPart]
+
+def assignSetValue(set):
+    if set == "Rational":
+        value = 0
+    elif set == "Irrational":
+        value = 1
+    elif set == "NonrealComplex":
+        value = 2
+    elif set == "PureImaginary":
+        value = 3
+    elif set == "NotComplexNumber":
+        value = 4
+    else:
+        value = 5
+        print "Something went wrong when assigning the set a value. Please look into this."
+                                                                  
+
+                                                                  
+    return value
+
+############# END OF DEFINITIONS ###############
+
+listOptions = ["Rational", "Irrational", "NonrealComplex", "PureImaginary", "NotComplexNumber"]
+
+########## QUESTION 4 #############
+set4 = sample(listOptions, 1)[0]
+answer4 = assignSetValue(set4)
+numerator4, denominator4, complexPart4 = generateDisplay(set4)
+
+########## QUESTION 5 #############
+set5 = sample(listOptions, 1)[0]
+answer5 = assignSetValue(set5)
+numerator5, denominator5, complexPart5 = generateDisplay(set5)
+
+########## QUESTION 6 #############
+set6 = sample(listOptions, 1)[0]
+answer6 = assignSetValue(set6)
+numerator6, denominator6, complexPart6 = generateDisplay(set6)
+</script>
+<div role="article" class="problem-environment question" id="problem2"><a id="x1-6r2"></a> Which of the following is the <strong>smallest</strong> set of Complex numbers that <script type="math/tex">\frac {\sage {numerator4}}{\sage {denominator4}} + \sage {complexPart4} </script> belongs
+to?
+<!--l. 181--><p class="noindent"><em>To work around current Xronos issues, input the corresponding number for the correct
+set. <br class="newline"/>Rational - 0 <br class="newline"/>Irrational - 1 <br class="newline"/>Nonreal Complex - 2 <br class="newline"/>Pure Imaginary - 3 <br class="newline"/>Not a Complex Number - 4 </em>
+</p><!--l. 183--><p class="noindent"><script type="math/tex">\answer {\sage {answer4}}</script>
+</p>
+</div>
+<div role="article" class="problem-environment question" id="problem3"><a id="x1-7r3"></a> Which of the following is the <strong>smallest</strong> set of Complex numbers that <script type="math/tex">\frac {\sage {numerator5}}{\sage {denominator5}} + \sage {complexPart5} </script> belongs
+                                                                  
+
+                                                                  
+to?
+<!--l. 196--><p class="noindent"><em>To work around current Xronos issues, input the corresponding number for the correct
+set. <br class="newline"/>Rational - 0 <br class="newline"/>Irrational - 1 <br class="newline"/>Nonreal Complex - 2 <br class="newline"/>Pure Imaginary - 3 <br class="newline"/>Not a Complex Number - 4 </em>
+</p><!--l. 198--><p class="noindent"><script type="math/tex">\answer {\sage {answer5}}</script>
+</p>
+</div>
+<div role="article" class="problem-environment question" id="problem4"><a id="x1-8r4"></a> Which of the following is the <strong>smallest</strong> set of Complex numbers that <script type="math/tex">\frac {\sage {numerator6}}{\sage {denominator6}} + \sage {complexPart6} </script> belongs
+to?
+<!--l. 211--><p class="noindent"><em>To work around current Xronos issues, input the corresponding number for the correct
+set. <br class="newline"/>Rational - 0 <br class="newline"/>Irrational - 1 <br class="newline"/>Nonreal Complex - 2 <br class="newline"/>Pure Imaginary - 3 <br class="newline"/>Not a Complex Number - 4 </em>
+</p><!--l. 213--><p class="noindent"><script type="math/tex">\answer {\sage {answer6}}</script>
+</p>
+</div>
+ 
+ 
+
+                                                                  
+
+                                                                  
+                                                                  
+
+
+</body></html>

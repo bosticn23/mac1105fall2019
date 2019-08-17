@@ -1,0 +1,140 @@
+<!DOCTYPE html><html lang="en"><head> <title>Order of Operations</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)"/> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)"/> 
+<!-- charset=utf-8,-css,html,htex4ht,xhtml --> 
+<meta name="src" content="propertiesOfRealNumbers.tex"/> 
+<meta name="author" content="Darryl Chamberlain
+Jr."/> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"/> 
+<meta name="ximera" content="version 0.0.1"/> 
+<link href="https://ximera.osu.edu/public/stylesheets/standalone.css" rel="stylesheet" media="screen"/> 
+<script type="text/javascript" async="" src="https://ximera.osu.edu/public/javascripts/standalone.min.js"></script> 
+<meta name="learning-outcome" content="Understand the different sets of numbers along with the properties of these sets."/> 
+<meta name="dependency" content="58f878c35abd4bb5487f89d91e8ef0b7d71bbaab coreModules/module1Activity/propertiesOfRealNumbers.tex"/></head><body> 
+<div class="preamble"><script type="math/tex">\newenvironment {prompt}{}{}
+\newcommand {\ungraded }[0]{}
+\newcommand {\HyperFirstAtBeginDocument }[0]{\AtBeginDocument }</script><script type="text/javascript"> 
+</script> 
+</div>
+<div class="abstract">
+<!--l. 18--><p class="noindent">Apply the properties of Real numbers to simplify expressions.
+</p></div>   <div class="maketitle"></div>
+<a href="https://cnx.org/contents/mwjClAV_@8.1:0KhpF2RH@23/Real-Numbers-Algebra-Essentials">Link to section in textbook</a>
+<!--l. 28--><p class="noindent">Now that we have the terminology for the different sets of numbers, we can review
+their properties. We’ll start with the Real numbers first. Watch <a href="https://mediasite.video.ufl.edu/Mediasite/Play/adc9e0878901450db891a5b46b383bf01d">this video</a> to review
+the properties of Real numbers. <em>Note: You won’t be asked to define a property or
+know the property by name. However, you <strong>will</strong> need to know how to use the properties
+to simplify in order.</em>
+</p><!--l. 30--><p class="noindent">We’ll focus on Order of Operations here as many students were taught an order
+that <strong>does not align with how most calculators/computers simplify
+expressions.</strong>
+</p>
+<div role="article" class="problem-environment question" id="problem1"><a id="x1-5r1"></a> Fill in the order below.
+<!--l. 35--><p class="noindent">P: <script type="math/tex">\answer [format=string]{Parentheses}</script>
+</p><!--l. 37--><p class="noindent">E: <script type="math/tex">\answer [format=string]{Exponents}</script>
+</p><!--l. 39--><p class="noindent">M/D: <script type="math/tex">\answer [format=string]{Multiplication}</script>  <script type="math/tex">\answer [format=string]{Division}</script>
+</p><!--l. 41--><p class="noindent">A/S: <script type="math/tex">\answer [format=string]{Addition}</script>  <script type="math/tex">\answer [format=string]{Subtraction}</script>
+</p></div>
+<div role="article" class="problem-environment question" id="problem2"><a id="x1-6r2"></a> Let’s take a closer look at why M/D is written on the same level. <script type="math/tex">7 \div 5 \times 4 = \answer {5.6}</script>
+<!--l. 48--><p class="noindent"><script type="math/tex">7 \times \frac {1}{5} \times 4 = \answer {5.6}</script>
+</p><!--l. 50--><p class="noindent">Multiplying by <script type="math/tex">\frac {1}{5}</script> is the same as dividing by <script type="math/tex">\answer {5}</script>. Now let’s see what happens if we did
+multiplication first.
+</p><!--l. 52--><p class="noindent"><script type="math/tex">7 \div (5 \times 4) = \answer {0.35}</script>
+</p><!--l. 54--><p class="noindent">By changing everything to multiplication, we can see why it is so important to read
+from left-to-right when operations are on the same level!
+</p></div>
+<!--l. 57--><p class="noindent">Now try to simplify the more complicated expressions below.
+</p>
+<script type="text/sagemath"># Order of Operations Question
+# Structure:
+    # $\sage{constants[0]} - \sage{constants[1]} \div \sage{constants[2]} * \sage{constants[3]} - (\sage{constants[4]} * \sage{constants[5]})$
+
+                                                                  
+
+                                                                  
+def convertToSage(constants):
+    p0, p1, p2, p3, p4, p5 = constants
+    c0 = Integer(p0)
+    c1 = Integer(p1)
+    c2 = Integer(p2)
+    c3 = Integer(p3)
+    c4 = Integer(p4)
+    c5 = Integer(p5)
+    return [c0, c1, c2, c3, c4, c5]
+
+def generateSolution(constants):
+    c0, c1, c2, c3, c4, c5 = convertToSage(constants)
+    solution = float((c0 - ((c1/c2) * c3)) - (c4 * c5 ))
+    print "Solution: %f" %solution
+    return solution
+
+def generateDistractor(constants):
+    c0, c1, c2, c3, c4, c5 = convertToSage(constants)
+    solution = float(c0 - (c1/(c2 * c3)) - (c4 * c5 ))
+    print "Distractor: %f" %solution
+    return solution
+
+def createConstants():
+    listNaturals=list(range(2, 21))
+    # Array of 6 distinct integers
+    c0, c1, c2, c3, c4, c5 = convertToSage(sample(listNaturals, 6))
+    constants = [c0, c1, c2, c3, c4, c5]
+    solution = generateSolution(constants)
+    distractor = generateDistractor(constants)
+    # CHECKS if doing the question wrong will still give the correct solution.
+    index = 0
+    while solution == distractor:
+                                                                  
+
+                                                                  
+        listNaturals = list(range(2, 21))
+        c0, c1, c2, c3, c4, c5 = convertToSage(sample(listNaturals, 6))
+        constants = [c0, c1, c2, c3, c4, c5]
+        solution = generateSolution(constants)
+        distractor = generateDistractor(constants)
+        # Makes sure we don't get stuck in an infinite loop
+        index += 1
+        if (index > 100):
+            break
+        print index
+    print solution, distractor
+    return constants
+
+########## END OF DEFINITIONS ###########
+
+######### QUESTION 7 ##########
+constants7 = createConstants()
+answer7 = generateSolution(constants7)
+
+######### QUESTION 8 ##########
+constants8 = createConstants()
+answer8 = generateSolution(constants8)
+
+######### QUESTION 9 ##########
+constants9 = createConstants()
+answer9 = generateSolution(constants9)
+
+</script>
+<div role="article" class="problem-environment question" id="problem3"><a id="x1-7r3"></a> Simplify the expression <script type="math/tex">\sage {constants7[0]} - \sage {constants7[1]} \div \sage {constants7[2]} * \sage {constants7[3]} - (\sage {constants7[4]} * \sage {constants7[5]})</script>.
+<!--l. 128--><p class="noindent"><script type="math/tex">\answer [tolerance=0.05]{\sage {answer7}}</script>
+</p></div>
+<div role="article" class="problem-environment question" id="problem4"><a id="x1-8r4"></a> Simplify the expression <script type="math/tex">\sage {constants8[0]} - \sage {constants8[1]} \div \sage {constants8[2]} * \sage {constants8[3]} - (\sage {constants8[4]} * \sage {constants8[5]})</script>.
+                                                                  
+
+                                                                  
+<!--l. 134--><p class="noindent"><script type="math/tex">\answer [tolerance=0.05]{\sage {answer8}}</script>
+</p></div>
+<div role="article" class="problem-environment question" id="problem5"><a id="x1-9r5"></a> Simplify the expression <script type="math/tex">\sage {constants9[0]} - \sage {constants9[1]} \div \sage {constants9[2]} * \sage {constants9[3]} - (\sage {constants9[4]} * \sage {constants9[5]})</script>.
+<!--l. 140--><p class="noindent"><script type="math/tex">\answer [tolerance=0.05]{\sage {answer9}}</script>
+</p></div>
+ 
+ 
+
+                                                                  
+
+                                                                  
+                                                                  
+
+
+</body></html>

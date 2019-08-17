@@ -1,0 +1,143 @@
+\documentclass{ximera}
+%\usepackage{sagetex}
+%% handout
+%% space
+%% newpage
+%% numbers
+%% nooutcomes
+
+%\input{../preamble} %% we can turn off input when making a master document
+
+\outcome{Understand the different sets of numbers along with the properties of these sets.}
+\author{Darryl Chamberlain Jr.}
+ 
+\title{Order of Operations}
+
+\begin{document}
+\begin{abstract}
+Apply the properties of Real numbers to simplify expressions. 
+\end{abstract}
+\maketitle
+
+\href{https://cnx.org/contents/mwjClAV_@8.1:0KhpF2RH@23/Real-Numbers-Algebra-Essentials}{Link to section in textbook}
+
+%%%%%%%%%%%%%%%%%%%%%
+%%%  Objective 3  %%%
+%%%%%%%%%%%%%%%%%%%%%
+
+Now that we have the terminology for the different sets of numbers, we can review their properties. We'll start with the Real numbers first. Watch \href{https://mediasite.video.ufl.edu/Mediasite/Play/adc9e0878901450db891a5b46b383bf01d}{this video} to review the properties of Real numbers. \textit{Note: You won't be asked to define a property or know the property by name. However, you \textbf{will} need to know how to use the properties to simplify in order.}
+
+We'll focus on Order of Operations here as many students were taught an order that \textbf{does not align with how most calculators/computers simplify expressions.}
+
+\begin{question}
+Fill in the order below.
+
+P: $\answer[format=string]{Parentheses}$
+
+E: $\answer[format=string]{Exponents}$
+
+M/D: $\answer[format=string]{Multiplication}$ \ $\answer[format=string]{Division}$
+
+A/S: $\answer[format=string]{Addition}$ \ $\answer[format=string]{Subtraction}$
+\end{question}
+
+\begin{question}
+Let's take a closer look at why M/D is written on the same level. 
+$7 \div 5 \times 4 = \answer{5.6}$
+
+$7 \times \frac{1}{5} \times 4 = \answer{5.6}$
+
+Multiplying by $\frac{1}{5}$ is the same as dividing by $\answer{5}$. Now let's see what happens if we did multiplication first. 
+
+$7 \div (5 \times 4) = \answer{0.35}$
+
+By changing everything to multiplication, we can see why it is so important to read from left-to-right when operations are on the same level! 
+\end{question}
+
+Now try to simplify the more complicated expressions below.  
+
+\begin{sagesilent}
+# Order of Operations Question
+# Structure:
+    # $\sage{constants[0]} - \sage{constants[1]} \div \sage{constants[2]} * \sage{constants[3]} - (\sage{constants[4]} * \sage{constants[5]})$
+
+def convertToSage(constants):
+    p0, p1, p2, p3, p4, p5 = constants
+    c0 = Integer(p0)
+    c1 = Integer(p1)
+    c2 = Integer(p2)
+    c3 = Integer(p3)
+    c4 = Integer(p4)
+    c5 = Integer(p5)
+    return [c0, c1, c2, c3, c4, c5]
+
+def generateSolution(constants):
+    c0, c1, c2, c3, c4, c5 = convertToSage(constants)
+    solution = float((c0 - ((c1/c2) * c3)) - (c4 * c5 ))
+    print "Solution: %f" %solution
+    return solution
+
+def generateDistractor(constants):
+    c0, c1, c2, c3, c4, c5 = convertToSage(constants)
+    solution = float(c0 - (c1/(c2 * c3)) - (c4 * c5 ))
+    print "Distractor: %f" %solution
+    return solution
+
+def createConstants():
+    listNaturals=list(range(2, 21))
+    # Array of 6 distinct integers
+    c0, c1, c2, c3, c4, c5 = convertToSage(sample(listNaturals, 6))
+    constants = [c0, c1, c2, c3, c4, c5]
+    solution = generateSolution(constants)
+    distractor = generateDistractor(constants)
+    # CHECKS if doing the question wrong will still give the correct solution.
+    index = 0
+    while solution == distractor:
+        listNaturals = list(range(2, 21))
+        c0, c1, c2, c3, c4, c5 = convertToSage(sample(listNaturals, 6))
+        constants = [c0, c1, c2, c3, c4, c5]
+        solution = generateSolution(constants)
+        distractor = generateDistractor(constants)
+        # Makes sure we don't get stuck in an infinite loop
+        index += 1
+        if (index > 100):
+            break
+        print index
+    print solution, distractor
+    return constants
+
+########## END OF DEFINITIONS ###########
+
+######### QUESTION 7 ##########
+constants7 = createConstants()
+answer7 = generateSolution(constants7)
+
+######### QUESTION 8 ##########
+constants8 = createConstants()
+answer8 = generateSolution(constants8)
+
+######### QUESTION 9 ##########
+constants9 = createConstants()
+answer9 = generateSolution(constants9)
+
+\end{sagesilent}
+
+\begin{question}
+Simplify the expression $\sage{constants7[0]} - \sage{constants7[1]} \div \sage{constants7[2]} * \sage{constants7[3]} - (\sage{constants7[4]} * \sage{constants7[5]})$. 
+
+$\answer[tolerance=0.05]{\sage{answer7}}$
+\end{question}
+
+\begin{question}
+	Simplify the expression $\sage{constants8[0]} - \sage{constants8[1]} \div \sage{constants8[2]} * \sage{constants8[3]} - (\sage{constants8[4]} * \sage{constants8[5]})$. 
+	
+	$\answer[tolerance=0.05]{\sage{answer8}}$
+\end{question}
+
+\begin{question}
+	Simplify the expression $\sage{constants9[0]} - \sage{constants9[1]} \div \sage{constants9[2]} * \sage{constants9[3]} - (\sage{constants9[4]} * \sage{constants9[5]})$.
+	
+	$\answer[tolerance=0.05]{\sage{answer9}}$
+\end{question}
+
+\end{document}

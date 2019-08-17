@@ -1,0 +1,229 @@
+\documentclass{ximera}
+\usepackage{sagetex}
+%% handout
+%% space
+%% newpage
+%% numbers
+%% nooutcomes
+
+\input{../preamble} %% we can turn off input when making a master document
+
+\outcome{Recognize and construct linear functions as well as solve linear equations.}
+\author{Darryl Chamberlain Jr.}
+ 
+\title{Objective 4 - Solve Linear Equations}
+
+\begin{document}
+\begin{abstract}
+Solve linear equations. 
+\end{abstract}
+\maketitle
+
+\href{https://cnx.org/contents/mwjClAV_@8.1:62_eXnY6@14/Linear-Equations-in-One-Variable}{Link to section in online textbook.}
+
+%%%%%%%%%%%%%%%%%%%%%
+%%%  Objective 2  %%%
+%%%%%%%%%%%%%%%%%%%%%
+
+Now, watch \underline{\href{https://mediasite.video.ufl.edu/Mediasite/Play/486c7ecd0ea14369bfc405492ae942f51d}{this video}} to review how to solve linear equations. These techniques will be used throughout most of the semester. Be sure to write notes to yourself that you can review later!
+
+Now try to solve the following linear equations. 
+
+\begin{sagesilent}
+# SOLVES BASIC LINEAR EQUATIONS OF THE FORM
+    # b0 * (b1 + b2 * x) = b3 ( x * b4 - b5)
+
+x = var('x')
+
+###################
+def maybeMakeNegative(rational):
+    maybeNegative = (-1)**ZZ.random_element(2)
+    rational = maybeNegative * rational
+    return rational
+
+def generateBlocks():
+    listNaturals = range(2, 16)
+    n0, n1, n2, n3, n4, n5 = sample(listNaturals, 6)
+    b0 = Integer(-n0)
+    b1 = Integer(maybeMakeNegative(n1))
+    b2 = Integer(maybeMakeNegative(n2))
+    b3 = Integer(-n3)
+    b4 = Integer(maybeMakeNegative(n4))
+    b5 = Integer(maybeMakeNegative(n5))
+    # Begin checking for one solution
+    OneSolutionCheck = b0*b2 - b3*b4
+    # Makes sure there is exactly one solution
+    while (OneSolutionCheck == 0):
+        listNaturals = range(2, 16)
+        n0, n1, n2, n3, n4, n5 = sample(listNaturals, 6)
+        b0 = Integer(-n0)
+        b1 = Integer(maybeMakeNegative(n1))
+        b2 = Integer(maybeMakeNegative(n2))
+        b3 = Integer(-n3)
+        b4 = Integer(maybeMakeNegative(n4))
+        b5 = Integer(maybeMakeNegative(n5))
+        # Begin checking for one solution
+        OneSolutionCheck = b0*b2 - b3*b4
+    blocks = [b0, b1, b2, b3, b4, b5]
+    return blocks
+
+#b0 * (b1 + b2 * x) =  b3 ( x * b4 - b5)
+def generateSolution(blocks):
+    a, b, c, d, e, f = blocks
+    basicLinearEquation = a * (b + c * x) - d * ( x * e - f)
+    solution = float(solve(basicLinearEquation, x)[0].rhs())
+    return solution
+
+######### END OF DEFINITIONS ##########
+
+##### QUESTION 10 #####
+blocks10 = generateBlocks()
+answer10 = generateSolution(blocks10)
+displayEquationLeft10 = blocks10[1]+blocks10[2]*x
+displayEquationRight10 = blocks10[4]*x-blocks10[5]
+
+##### QUESTION 11 #####
+blocks11 = generateBlocks()
+answer11 = generateSolution(blocks11)
+displayEquationLeft11 = blocks11[1]+blocks11[2]*x
+displayEquationRight11 = blocks11[4]*x-blocks11[5]
+
+##### QUESTION 12 #####
+blocks12 = generateBlocks()
+answer12 = generateSolution(blocks12)
+displayEquationLeft12 = blocks12[1]+blocks12[2]*x
+displayEquationRight12 = blocks12[4]*x-blocks12[5]
+
+\end{sagesilent}
+
+\begin{question}
+Solve the equation below. 
+
+$\sage{blocks10[0]} (\sage{displayEquationLeft10}) = \sage{blocks10[3]} (\sage{displayEquationRight10})$
+
+$x = \answer[tolerance=0.05]{\sage{answer10}}$
+\end{question}
+
+\begin{question}
+Solve the equation below. 
+
+$\sage{blocks11[0]} (\sage{displayEquationLeft11}) = \sage{blocks11[3]} (\sage{displayEquationRight11})$
+
+$x = \answer[tolerance=0.05]{\sage{answer11}}$
+\end{question}
+
+\begin{question}
+Solve the equation below. 
+
+$\sage{blocks12[0]} (\sage{displayEquationLeft12}) = \sage{blocks12[3]} (\sage{displayEquationRight12})$
+
+$x = \answer[tolerance=0.05]{\sage{answer12}}$
+\end{question}
+
+%%%%%%%%%% TYPE 2 - ADVANCED LINEAR EQUATIONS
+
+\begin{sagesilent}
+# Type 2 - Solve Advanced linear equations (fractions)
+#(coefficients[0]*x + numerators[0])/denominators[0]
+    # - (coefficients[1]*x+numerators[1])/denominators[1]
+    # = (coefficients[2]*x+numerators[2])/denominators[2]
+
+x = var('x')
+###################
+def maybeMakeNegative(rational):
+    maybeNegative = (-1)**ZZ.random_element(2)
+    rational = maybeNegative * rational
+    return rational
+
+#No restrictions on coefficients or numerators
+def createThreeRandomIntegers():
+    a = maybeMakeNegative(ZZ.random_element(3, 9))
+    b = maybeMakeNegative(ZZ.random_element(3, 9))
+    c = maybeMakeNegative(ZZ.random_element(3, 9))
+    return [a, b, c]
+
+def createThreeDistinctRandomNaturals():
+    possibleNaturals= range(2,7)
+    n1, n2, n3 = sample(possibleNaturals, 3)
+    naturals = [Integer(n1), Integer(n2), Integer(n3)]
+    return naturals
+
+def createThreeDistinctRandomIntegers():
+    a, b, c = sample(range(3, 8), 3)
+    return [Integer(maybeMakeNegative(a)), Integer(maybeMakeNegative(b)), Integer(maybeMakeNegative(c))]
+
+def createViableConstants():
+    a, b, c = createThreeRandomIntegers()
+    d, e, f = createThreeRandomIntegers()
+    g, h, i = createThreeDistinctRandomNaturals()
+    # Check that there is exactly one solution to the linear equation
+    OneSolutionCheck = (a/g) - (b/h) - (c/i)
+    while (OneSolutionCheck == 0):
+        a, b, c = createThreeRandomIntegers()
+        d, e, f = createThreeRandomIntegers()
+        g, h, i = createThreeDistinctRandomNaturals()
+        OneSolutionCheck = (a/g) - (b/h) - (c/i)
+    return [a, b, c, d, e, f, g, h, i]
+
+def createSolution(constants):
+    a, b, c, d, e, f, g, h, i = constants
+    equationBlockOne = (a*x+d)/g
+    equationBlockTwo = (b*x+e)/h
+    equationBlockThree = (c*x+f)/i
+    toSolve = equationBlockOne - equationBlockTwo - equationBlockThree
+    solution = round(float(solve(toSolve, x)[0].rhs()), 3)
+    return solution
+
+######## END OF DEFINITIONS ###########
+
+##### QUESTION 13 #####
+constants13 = createViableConstants()
+displayNumeratorA13 = constants13[0] * x + constants13[3]
+displayNumeratorB13 = constants13[1] * x + constants13[4]
+displayNumeratorC13 = constants13[2] * x + constants13[5]
+answer13 = createSolution(constants13)
+
+##### QUESTION 14 #####
+constants14 = createViableConstants()
+displayNumeratorA14 = constants14[0] * x + constants14[3]
+displayNumeratorB14 = constants14[1] * x + constants14[4]
+displayNumeratorC14 = constants14[2] * x + constants14[5]
+answer14 = createSolution(constants14)
+
+##### QUESTION 15 #####
+constants15 = createViableConstants()
+displayNumeratorA15 = constants15[0] * x + constants15[3]
+displayNumeratorB15 = constants15[1] * x + constants15[4]
+displayNumeratorC15 = constants15[2] * x + constants15[5]
+answer15 = createSolution(constants15)
+\end{sagesilent}
+
+\begin{question}
+Solve the equation below. 
+
+$\frac{\sage{displayNumeratorA13}}{\sage{constants13[6]}} - \frac{\sage{displayNumeratorB13}}{\sage{constants13[7]}} = \frac{\sage{displayNumeratorC13}}{\sage{constants13[8]}}$
+
+\begin{hint}
+Adding/Multiplying fractions can be difficult and tedious. Is there something we can multiply both sides of the equation by to remove the fractions from the equation?
+\end{hint}
+
+$x = \answer[tolerance=0.05]{\sage{answer13}}$
+\end{question}
+
+\begin{question}
+Solve the equation below. 
+
+$\frac{\sage{displayNumeratorA14}}{\sage{constants14[6]}} - \frac{\sage{displayNumeratorB14}}{\sage{constants14[7]}} = \frac{\sage{displayNumeratorC14}}{\sage{constants14[8]}}$
+
+$x = \answer[tolerance=0.05]{\sage{answer14}}$
+\end{question}
+
+\begin{question}
+Solve the equation below. 
+
+$\frac{\sage{displayNumeratorA15}}{\sage{constants15[6]}} - \frac{\sage{displayNumeratorB15}}{\sage{constants15[7]}} = \frac{\sage{displayNumeratorC15}}{\sage{constants15[8]}}$
+
+$x= \answer[tolerance=0.5]{\sage{answer15}}$
+\end{question}
+
+\end{document}
